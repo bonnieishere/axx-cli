@@ -49,5 +49,21 @@ module.exports = {
 
     // 是否有source map
     productionSourceMap: true
+  },
+
+  //抽离需要抽离的依赖
+  vendors: [
+    'react',
+    'react-dom',
+    'react-router',
+    'react-redux',
+    'lodash',
+    'redux',
+    'antd'
+  ],
+
+  //配置全局依赖
+  externals: {
+    'Jquery': '$'
   }
 }

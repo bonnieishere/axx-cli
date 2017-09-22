@@ -23,9 +23,7 @@ module.exports = {
     extensions: ['', '.js', '.jsx', '.css', '.less', '.json'],
     alias: config.alias
   },
-  externals: {
-    'Jquery': '$'
-  },
+  externals: config.externals,
   //配置happypack
   plugins: [
     new webpack.DllReferencePlugin({

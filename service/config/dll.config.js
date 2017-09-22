@@ -2,15 +2,7 @@ const webpack = require('webpack')
 const path = require('path')
 let config = require(path.resolve(process.cwd(), 'config'))
 
-const vendors = [
-  'react',
-  'react-dom',
-  'react-router',
-  'react-redux',
-  'lodash',
-  'redux',
-  'antd'
-]
+const vendors = config.vendors
 
 module.exports = {
   output: {
