@@ -3,7 +3,5 @@
 require('commander')
   .version(require('../package').version)
   .usage('<command> [options]')
-  .command('init', 'generate a new project from a template')
-  .command('service', 'run dev env or run build')
-  .command('add <lang>', 'add node modules')
+  .command('build', '执行构建模块相关执行')
   .parse(process.argv)

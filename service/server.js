@@ -8,7 +8,7 @@ let express = require('express')
 let proxy = require('express-http-proxy')
 let webpack = require('webpack')
 let _ = require('./common/utils')
-let config = require(path.resolve(process.cwd(), 'config'))
+let config = require(path.resolve(process.cwd(), 'axx-cli-config/config'))
 let ProgressPlugin = require('webpack/lib/ProgressPlugin')
 let webpackConfig = require('./config/dev.config')
 let app = express()
@@ -81,6 +81,7 @@ function setStatic() {
   app.use('/assets', express.static(path.join(config.rootpath, 'src/assets')))
   app.use('/libs', express.static(path.join(config.rootpath, 'src/assets/libs')))
   app.use('/css', express.static(path.join(config.rootpath, 'src/assets/css')))
+  app.use('/static', express.static(path.join(config.rootpath, 'src/assets/static')))
 }
 // 绑定mock apis
 function bindMock() {

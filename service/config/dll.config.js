@@ -1,12 +1,12 @@
 const webpack = require('webpack')
 const path = require('path')
-let config = require(path.resolve(process.cwd(), 'config'))
+let config = require(path.resolve(process.cwd(), 'axx-cli-config/config'))
 
 const vendors = config.vendors
 
 module.exports = {
   output: {
-    path: path.resolve(config.devpath, 'assets/libs'),
+    path: config.dllpath,
     filename: '[name].js',
     library: '[name]',
   },
@@ -26,3 +26,4 @@ module.exports = {
     }),
   ]
 }
+

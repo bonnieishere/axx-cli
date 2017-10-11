@@ -7,6 +7,7 @@ let path = require('path')
 let fs = require('fs')
 let os = require('os')
 let Mock = require('mockjs')
+let ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 let _ = module.exports = function () {}
 
@@ -23,7 +24,7 @@ lodash.assign(_, lodash)
  */
 _.getEntry = function (config) {
   return _.reduce(config.views, (result, value, key) => {
-    result[key] = `${config.devpath}/apps/${key}/index.jsx`
+    result[key] = config.type ? `${config.devpath}/pages/${key}/index.js` : `${config.devpath}/apps/${key}/index.jsx`
     return result;
   }, {})
 }
@@ -95,4 +96,53 @@ _.getIpV4 = function () {
       }
     }
   }
+}
+
+_.cssLoaders = function (options) {
+  options = options || {}
+  // generate loader string to be used with extract text plugin
+  function generateLoaders (loaders) {
+    var sourceLoader = loaders.map(function (loader) {
+      var extraParamChar
+      if (/\?/.test(loader)) {
+        loader = loader.replace(/\?/, '-loader?')
+        extraParamChar = '&'
+      } else {
+        loader = loader + '-loader'
+        extraParamChar = '?'
+      }
+      return loader + (options.sourceMap ? extraParamChar + 'sourceMap' : '')
+    }).join('!')
+
+    if (options.extract) {
+      return ExtractTextPlugin.extract('vue-style-loader', sourceLoader)
+    } else {
+      return ['vue-style-loader', sourceLoader].join('!')
+    }
+  }
+
+  // http://vuejs.github.io/vue-loader/configurations/extract-css.html
+  return {
+    css: generateLoaders(['css']),
+    postcss: generateLoaders(['css', 'postcss']),
+    less: generateLoaders(['css', 'less'])
+  }
+}
+
+_.assetsPath = function (_path, config) {
+  return path.posix.join(config.build.assetsSubDirectory, _path)
+}
+
+// Generate loaders for standalone style files (outside of .vue)
+_.styleLoaders = function (options) {
+  var output = []
+  var loaders = _.cssLoaders(options)
+  for (var extension in loaders) {
+    var loader = loaders[extension]
+    output.push({
+      test: new RegExp('\\.' + extension + '$'),
+      loader: loader
+    })
+  }
+  return output
 }

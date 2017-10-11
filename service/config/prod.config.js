@@ -2,16 +2,12 @@ let webpack = require('webpack')
 let merge = require('webpack-merge')
 let htmlGenerator = require('../common/htmlGenerator')
 let path = require('path')
-let config = require(path.resolve(process.cwd(), 'config'))
+let config = require(path.resolve(process.cwd(), 'axx-cli-config/config'))
 let baseWebpackConfig = require('./base.config')
 
 
 module.exports = merge(baseWebpackConfig, {
-  output: {
-    path: config.build.prodRoot + '/assets/',
-    publicPath: '../../assets/',
-    filename: '[name].[hash:6].min.js'
-  },
+  output: config.build.output,
 
   plugins: [
     new webpack.optimize.UglifyJsPlugin({

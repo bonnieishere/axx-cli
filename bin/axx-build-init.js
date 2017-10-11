@@ -7,6 +7,16 @@ let program = require('commander')
 let webpack = require('webpack')
 let ProgressPlugin = require('webpack/lib/ProgressPlugin')
 
+let colors = require('colors')
+
+if (!process.argv.slice(2).length) {
+  program.outputHelp(make_red);
+}
+
+function make_red(txt) {
+  return colors.red(txt); //display the help text in red on the console
+}
+
 const temp = path.join(__dirname, '../template/*')
 
 let _createEmptyProject = function () {
@@ -17,14 +27,14 @@ let _createEmptyProject = function () {
 let _initProject = function () {
   let spinner = ora('')
 
-  cp('-R', temp, process.cwd())
-
   let dllConfig = require('../service/config/dll.config')
   spinner.start()
   dllConfig.watch = true
   dllConfig.progress = true
 
- let compiler = webpack(dllConfig)
+  console.log(dllConfig)
+
+  let compiler = webpack(dllConfig)
   compiler.apply(
     new ProgressPlugin(function (percentage, msg) {
       spinner.text = '初始化中 ... ' + (percentage * 100).toFixed(0) + '% ' + msg;
@@ -47,10 +57,16 @@ let _initProject = function () {
   })
 }
 
+let _initConfig = function () {
+  mkdir('-p', path.resolve(process.cwd(), 'axx-cli-config'))
+  cp('-R', temp, path.resolve(process.cwd(), 'axx-cli-config'))
+}
 
 program
-  .option('-b, --begin', 'init a empty project', _createEmptyProject)
-  .option('-s, --start', 'init an old project', _initProject)
+  .usage('<command> [options]')
+  .option('-b, --begin', '初始化一个空项目（暂无）', _createEmptyProject)
+  .option('-c, --config', '初始化配置文件', _initConfig)
+  .option('-s, --start', '执行配置文件', _initProject)
   .parse(process.argv)
 
 

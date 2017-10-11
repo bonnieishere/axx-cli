@@ -4,7 +4,7 @@
 
 require('shelljs/global')
 let path = require('path')
-let config = require(path.resolve(process.cwd(), 'config'))
+let config = require(path.resolve(process.cwd(), 'axx-cli-config/config'))
 process.env.NODE_ENV = config.build.env
 
 let os = require("os")
@@ -15,21 +15,16 @@ let moment = require('moment')
 let webpack = require('webpack')
 let webpackConfig = require('./config/prod.config')
 let ProgressPlugin = require('webpack/lib/ProgressPlugin')
+let buildScript = require(path.resolve(process.cwd(), 'axx-cli-config/build'))
 
 
 // webpack编译
 function webpackCompile() {
 
-  let
-    spinner = ora('')
+  let spinner = ora('')
   spinner.start()
 
-  rm('-rf', config.build.prodRoot)
-  mkdir('-p', config.build.prodRoot)
-  mkdir('-p', config.build.prodRoot + '/')
-  cp('-R', path.join(config.devpath, 'assets'),
-    config.build.prodRoot + (os.platform() === 'darwin' ? '/assets/' : '/assets/')
-  )
+  buildScript()
   webpackConfig.watch = true
   webpackConfig.progress = true
 
