@@ -12,7 +12,7 @@
 ### init
 
 ```sh
-axx build init <option>
+    axx build init <option>
 ```
 ```
 Options:
@@ -24,7 +24,7 @@ Options:
 ### service
 
 ```sh
-axx build service <option>
+    axx build service <option>
 ```
 
 ```
