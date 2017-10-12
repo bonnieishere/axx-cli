@@ -84,5 +84,13 @@ module.exports = {
   // 定义import引用别名
   externals: {
     'Jquery': '$'
+  },
+
+  // 设置静态文件目录
+  devStatic: {
+    '/assets': 'src/assets',
+    '/libs': 'src/assets/libs',
+    '/css': 'src/assets/css',
+    '/static': 'src/assets/static',
   }
 }

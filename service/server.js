@@ -78,10 +78,9 @@ function decorateProxy() {
 }
 // 设置静态文件目录
 function setStatic() {
-  app.use('/assets', express.static(path.join(config.rootpath, 'src/assets')))
-  app.use('/libs', express.static(path.join(config.rootpath, 'src/assets/libs')))
-  app.use('/css', express.static(path.join(config.rootpath, 'src/assets/css')))
-  app.use('/static', express.static(path.join(config.rootpath, 'src/assets/static')))
+  _.forEach(config.devStatic, (value, key) =>{
+    app.use(key, express.static(path.join(config.rootpath, value)))
+  })
 }
 // 绑定mock apis
 function bindMock() {
