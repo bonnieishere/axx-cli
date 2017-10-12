@@ -12,7 +12,7 @@
 ### init
 
 ```
-	axx build init <option>
+axx build init <option>
 ```
 ```
 Options:
@@ -22,7 +22,7 @@ Options:
 ```
 ### service
 ```
-	axx build service <option>
+axx build service <option>
 ```
 ```
 Options:
@@ -31,7 +31,7 @@ Options:
 ```
 ### add
 ```
-	axx build add <npm package name>
+axx build add <npm package name>
 ```
 
 ## Backers
