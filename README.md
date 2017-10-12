@@ -11,7 +11,7 @@
 ## Command
 ### init
 
-```
+```sh
 axx build init <option>
 ```
 ```
@@ -20,18 +20,23 @@ Options:
     -c, --config  初始化配置文件
     -s, --start   执行配置文件
 ```
+
 ### service
-```
+
+```sh
 axx build service <option>
 ```
+
 ```
 Options:
     -b, --build  启动编译
     -d, --dev    启动本地调试
 ```
+
 ### add
-```
-axx build add <npm package name>
+
+```sh
+    axx build add <npm package name>
 ```
 
 ## Backers
