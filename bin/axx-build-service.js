@@ -1,13 +1,16 @@
 #!/usr/bin/env node
 
-let program = require('commander')
-let service = require('../service')
 
+let program = require('commander')
 let colors = require('colors')
+let service = require('../service')
 
 if (!process.argv.slice(2).length) {
   program.outputHelp(make_red);
 }
+
+
+
 
 function make_red(txt) {
   return colors.red(txt); //display the help text in red on the console

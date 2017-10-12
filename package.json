@@ -1,6 +1,6 @@
 {
   "name": "axx-cli",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -60,6 +60,7 @@
     "react-dom": "^15.4.0",
     "shelljs": "^0.7.8",
     "style-loader": "^0.13.1",
+    "undefined": "^0.1.0",
     "url-loader": "^0.5.7",
     "vue": "^2.4.4",
     "vue-html-loader": "^1.2.4",

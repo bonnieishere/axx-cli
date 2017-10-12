@@ -5,6 +5,7 @@ let program = require('commander')
 
 let colors = require('colors')
 
+
 if (!process.argv.slice(2).length) {
   program.outputHelp(make_red);
 }
