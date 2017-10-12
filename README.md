@@ -5,7 +5,7 @@
 ## Install
 
 ```sh
-    npm install axx-cli
+    npm install axx-cli -g
 ```
 
 ## Command
