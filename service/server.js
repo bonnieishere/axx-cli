@@ -12,6 +12,7 @@ let config = require(path.resolve(process.cwd(), 'axx-cli-config/config'))
 let ProgressPlugin = require('webpack/lib/ProgressPlugin')
 let webpackConfig = require('./config/dev.config')
 let app = express()
+
 // 监听端口
 let port = config.port
 // 代理配置

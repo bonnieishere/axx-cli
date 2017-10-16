@@ -2,16 +2,19 @@ let webpack = require('webpack')
 let merge = require('webpack-merge')
 let htmlGenerator = require('../common/htmlGenerator')
 let path = require('path')
+let _ = require('lodash')
 let ExtractTextPlugin = require("extract-text-webpack-plugin")
 let config = require(path.resolve(process.cwd(), 'axx-cli-config/config'))
 let baseWebpackConfig = require('./base.config')
 
-baseWebpackConfig.module.loaders[5] = ({
+let baseWebpackConfigClone = _.cloneDeep(baseWebpackConfig)
+baseWebpackConfigClone.module.loaders[5] = ({
   test: /\.css?$/,
   loader: ExtractTextPlugin.extract("style-loader","css-loader")
 })
 
-module.exports = merge(baseWebpackConfig, {
+
+module.exports = merge(baseWebpackConfigClone, {
   output: config.build.output,
 
   plugins: [
@@ -25,8 +28,11 @@ module.exports = merge(baseWebpackConfig, {
       'process.env': {
         NODE_ENV: JSON.stringify('production')
       }
-    })
+    }),
+
+    new ExtractTextPlugin(config.build.cssPath),
 
   ].concat(htmlGenerator(config.views))
+
 })
 

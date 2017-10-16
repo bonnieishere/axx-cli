@@ -17,7 +17,6 @@ let webpackConfig = require('./config/prod.config')
 let ProgressPlugin = require('webpack/lib/ProgressPlugin')
 let buildScript = require(path.resolve(process.cwd(), 'axx-cli-config/build'))
 
-
 // webpack编译
 function webpackCompile() {
 

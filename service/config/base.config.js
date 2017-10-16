@@ -16,7 +16,6 @@ let postcssSalad = require('postcss-salad')
 let postcssPlugins = [postcssSalad]
 
 
-
 module.exports = {
   entry: _.getEntry(config),
   output: {
@@ -62,10 +61,6 @@ module.exports = {
       threadPool: happyThreadPool,
       verbose: true
     }),
-
-    //样式分离
-    new ExtractTextPlugin(config.build.cssPath),
-
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.NoErrorsPlugin()
   ],
@@ -123,7 +118,11 @@ module.exports = {
   },
 
   vue: {
-    loaders: _.cssLoaders(),
+    loaders: {
+      css: 'vue-style-loader!css-loader',
+      postcss: 'vue-style-loader!css-loader!postcss-loader',
+      less: 'vue-style-loader!css-loader!less-loader'
+    },
     postcss: postcssPlugins
   },
 
