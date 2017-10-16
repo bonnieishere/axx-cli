@@ -32,8 +32,6 @@ let _initProject = function () {
   dllConfig.watch = true
   dllConfig.progress = true
 
-  console.log(dllConfig)
-
   let compiler = webpack(dllConfig)
   compiler.apply(
     new ProgressPlugin(function (percentage, msg) {

@@ -11,9 +11,10 @@ let os = require('os')
 let ExtractTextPlugin = require("extract-text-webpack-plugin")
 let happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
-var postcssSalad = require('postcss-salad')
+let postcssSalad = require('postcss-salad')
 
-var postcssPlugins = [postcssSalad]
+let postcssPlugins = [postcssSalad]
+
 
 
 module.exports = {
@@ -110,7 +111,7 @@ module.exports = {
       },
       {
         test: /\.css?$/,
-        loader:  ExtractTextPlugin.extract("style-loader","css-loader")
+        loaders: ['style-loader', 'css-loader']
       },
       {
         test: /\.less?$/,
