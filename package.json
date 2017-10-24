@@ -1,6 +1,6 @@
 {
   "name": "axx-cli",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,7 @@
   "author": "summernight",
   "license": "ISC",
   "dependencies": {
+    "antd": "^2.6.4",
     "babel-core": "^6.17.0",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^6.2.5",
@@ -58,6 +59,9 @@
     "react": "^15.4.0",
     "react-chartjs": "^0.8.0",
     "react-dom": "^15.4.0",
+    "react-redux": "^4.4.0",
+    "react-router": "^2.2.4",
+    "redux": "^3.6.0",
     "shelljs": "^0.7.8",
     "style-loader": "^0.13.1",
     "undefined": "^0.1.0",

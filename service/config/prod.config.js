@@ -8,6 +8,7 @@ let config = require(path.resolve(process.cwd(), 'axx-cli-config/config'))
 let baseWebpackConfig = require('./base.config')
 
 let baseWebpackConfigClone = _.cloneDeep(baseWebpackConfig)
+
 baseWebpackConfigClone.module.loaders[5] = ({
   test: /\.css?$/,
   loader: ExtractTextPlugin.extract("style-loader","css-loader")

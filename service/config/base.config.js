@@ -8,7 +8,6 @@ let config = require(path.resolve(process.cwd(), 'axx-cli-config/config'))
 let _ = require('../common/utils')
 let HappyPack = require('happypack')
 let os = require('os')
-let ExtractTextPlugin = require("extract-text-webpack-plugin")
 let happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
 let postcssSalad = require('postcss-salad')

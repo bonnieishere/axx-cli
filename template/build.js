@@ -1,3 +1,6 @@
+let config = require('./config')
+let path = require('path')
+let os = require("os")
 require('shelljs/global')
 
 module.exports = () => {
