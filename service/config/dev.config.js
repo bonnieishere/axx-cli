@@ -17,11 +17,13 @@ let baseConfig = require('./base.config')
 //   title: 'CRUD DEMO'
 // }
 
-Object.keys(baseConfig.entry).forEach(function (name) {
-  baseConfig.entry[name] = [ path.join(config.rootpath, 'axx-cli-config/dev-client') ].concat(baseConfig.entry[name])
+
+let baseConfigClone = _.cloneDeep(baseConfig)
+Object.keys(baseConfigClone.entry).forEach(function (name) {
+  baseConfigClone.entry[name] = [ path.join(config.rootpath, 'axx-cli-config/dev-client') ].concat(baseConfigClone.entry[name])
 })
 
-module.exports = merge(baseConfig, {
+module.exports = merge(baseConfigClone, {
 
   devtool: '#eval-source-map',
 

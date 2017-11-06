@@ -5,7 +5,7 @@
 ## Install
 
 ```sh
-    npm install axx-cli -g
+    npm install axx-cli -g --registry=https://registry.npm.taobao.org
 ```
 
 ## Command

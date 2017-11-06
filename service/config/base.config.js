@@ -14,6 +14,10 @@ let postcssSalad = require('postcss-salad')
 
 let postcssPlugins = [postcssSalad]
 
+//扩展别名
+config.alias['eventsource-polyfill'] = path.join(path.resolve(__dirname, '../../node_modules'), 'eventsource-polyfill')
+config.alias['webpack-hot-middleware'] = path.join(path.resolve(__dirname, '../../node_modules'), 'webpack-hot-middleware')
+config.alias['shelljs/global'] = path.join(path.resolve(__dirname, '../../node_modules'), 'shelljs/global')
 
 module.exports = {
   entry: _.getEntry(config),
