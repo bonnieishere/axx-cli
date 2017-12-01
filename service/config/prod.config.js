@@ -14,7 +14,6 @@ baseWebpackConfigClone.module.loaders[5] = ({
   loader: ExtractTextPlugin.extract("style-loader","css-loader")
 })
 
-
 module.exports = merge(baseWebpackConfigClone, {
   output: config.build.output,
 
@@ -33,7 +32,7 @@ module.exports = merge(baseWebpackConfigClone, {
 
     new ExtractTextPlugin(config.build.cssPath),
 
-  ].concat(htmlGenerator(config.views))
+  ].concat(htmlGenerator())
 
 })
 

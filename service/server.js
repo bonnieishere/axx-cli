@@ -2,21 +2,26 @@
  * 本地调试脚本
  */
 process.env.NODE_ENV = 'development'
+
 let ora = require('ora')
 let path = require('path')
 let express = require('express')
 let proxy = require('express-http-proxy')
 let webpack = require('webpack')
-let _ = require('./common/utils')
-let config = require(path.resolve(process.cwd(), 'axx-cli-config/config'))
 let ProgressPlugin = require('webpack/lib/ProgressPlugin')
-let webpackConfig = require('./config/dev.config')
 let app = express()
+
+let _ = require('./common/utils')
+let webpackConfig = require('./config/dev.config')
+let hook = require(path.resolve(process.cwd(), 'axx-cli-config/custom/hook'))
+let config = require(path.resolve(process.cwd(), 'axx-cli-config/config'))
 
 // 监听端口
 let port = config.port
 // 代理配置
 let proxyTable = config.proxy
+
+hook.onBeforeDev(webpackConfig)
 
 let compiler = webpack(webpackConfig)
 // 编译webpack
@@ -47,6 +52,8 @@ function webpackCompiler() {
   let hotMiddleware = require('webpack-hot-middleware')(compiler)
   // force page reload when html-webpack-plugin template changes
   compiler.plugin('compilation', function (compilation) {
+    hook.onAfterDev(app, compilation)
+
     compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
       hotMiddleware.publish({ action: 'reload' })
       cb()

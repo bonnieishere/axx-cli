@@ -9,16 +9,10 @@
 ```
 
 ## Command
-### init
+### init<font color=red >（第一步，在项目目录中执行）</font>
 
 ```sh
-    axx build init <option>
-```
-```
-Options:
-    -b, --begin   初始化一个空项目（暂无）
-    -c, --config  初始化配置文件
-    -s, --start   执行配置文件
+    axx build init
 ```
 
 ### service

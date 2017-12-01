@@ -11,31 +11,33 @@ let os = require('os')
 let happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
 let postcssSalad = require('postcss-salad')
-
 let postcssPlugins = [postcssSalad]
 
-//扩展别名
-config.alias['eventsource-polyfill'] = path.join(path.resolve(__dirname, '../../node_modules'), 'eventsource-polyfill')
-config.alias['webpack-hot-middleware'] = path.join(path.resolve(__dirname, '../../node_modules'), 'webpack-hot-middleware')
-config.alias['shelljs/global'] = path.join(path.resolve(__dirname, '../../node_modules'), 'shelljs/global')
+let alias = Object.assign({}, config.alias)
 
+//扩展别名
 module.exports = {
-  entry: _.getEntry(config),
+  entry: config.entry,
+
   output: {
     path: config.devpath + '/assets/',
     publicPath: '/',
     filename: '[name].js'
   },
+
   resolve: {
-    root: config.rootpath,
+    root: path.join(__dirname, '../../node_modules'),
     extensions: config.extensions,
-    alias: config.alias
+    alias: alias
   },
+
   resolveLoader: {
     fallback: [path.join(__dirname, '../../node_modules')]
   },
+
   externals: config.externals,
-  //配置happypack
+
+  // 配置happypack
   plugins: [
     new webpack.DllReferencePlugin({
       context: __dirname,
@@ -70,17 +72,11 @@ module.exports = {
 
   module: {
     preLoaders: [
-      // {
-      //   test: /\.js$/,
-      //   loader: 'eslint',
-      //   exclude: /node_modules/
-      // }
     ],
     loaders: [
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        include: config.rootpath,
         exclude: /node_modules/
       },
       {
@@ -108,6 +104,10 @@ module.exports = {
         }
       },
       {
+        test: /\.tpl$/,
+        loader: 'vue-template'
+      },
+      {
         test: /\.css?$/,
         loaders: ['style-loader', 'css-loader']
       },
@@ -118,22 +118,5 @@ module.exports = {
       },
       {test: /\.json$/, loader: 'json'}
     ]
-  },
-
-  vue: {
-    loaders: {
-      css: 'vue-style-loader!css-loader',
-      postcss: 'vue-style-loader!css-loader!postcss-loader',
-      less: 'vue-style-loader!css-loader!less-loader'
-    },
-    postcss: postcssPlugins
-  },
-
-  postcss: function () {
-    return postcssPlugins
-  },
-
-  eslint: {
-    formatter: require('eslint-friendly-formatter')
   }
 }

@@ -15,21 +15,6 @@ let _ = module.exports = function () {}
 lodash.assign(_, lodash)
 
 /**
- * 生成js路径
- * @param  {String}  config 配置项
- * @return {String}
- * @memberOf axx-common.util
- * @name getEntry
- * @function
- */
-_.getEntry = function (config) {
-  return _.reduce(config.views, (result, value, key) => {
-    result[key] = config.type ? `${config.devpath}/pages/${key}/index.js` : `${config.devpath}/apps/${key}/index.jsx`
-    return result;
-  }, {})
-}
-
-/**
  * mock代理
  * @param  {String}   dir   目录
  * @return  {String}  req   require
