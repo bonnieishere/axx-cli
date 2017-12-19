@@ -16,6 +16,7 @@ let webpack = require('webpack')
 let webpackConfig = require('./config/prod.config')
 let ProgressPlugin = require('webpack/lib/ProgressPlugin')
 let hook = require(path.resolve(process.cwd(), 'axx-cli-config/custom/hook'))
+console.log(webpackConfig.plugins)
 
 // webpack编译
 function webpackCompile() {
@@ -23,7 +24,6 @@ function webpackCompile() {
   let spinner = ora('')
   spinner.start()
 
-  webpackConfig.watch = true
   webpackConfig.progress = true
   
   hook.onBeforeBuild(webpackConfig)
@@ -37,6 +37,7 @@ function webpackCompile() {
   )
 
   compiler.run(function (err, stats) {
+    hook.onBeforeBuild(err, stats)
 
     if(stats.hasErrors()) {
       console.log('构建失败，错误信息如下：')

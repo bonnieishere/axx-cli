@@ -17,7 +17,7 @@ module.exports = function(rootpath, devpath, views) {
 	  // 生产配置
 	  build: {
 	    output: {
-	      path:  path.join(rootpath, 'prod') + '/assets/',
+	      path: path.join(rootpath, 'prod/assets/'),
 	      publicPath: '../../assets/',
 	      filename: '[name].[hash:6].min.js'
 	    }

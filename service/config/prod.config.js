@@ -9,7 +9,7 @@ let baseWebpackConfig = require('./base.config')
 
 let baseWebpackConfigClone = _.cloneDeep(baseWebpackConfig)
 
-baseWebpackConfigClone.module.loaders[5] = ({
+baseWebpackConfigClone.module.loaders[6] = ({
   test: /\.css?$/,
   loader: ExtractTextPlugin.extract("style-loader","css-loader")
 })
@@ -18,12 +18,12 @@ module.exports = merge(baseWebpackConfigClone, {
   output: config.build.output,
 
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      comments: false
-    }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false
+    //   },
+    //   comments: false
+    // }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production')
@@ -35,4 +35,3 @@ module.exports = merge(baseWebpackConfigClone, {
   ].concat(htmlGenerator())
 
 })
-

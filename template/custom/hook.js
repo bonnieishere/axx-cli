@@ -11,11 +11,11 @@ module.exports = {
 	 * @param {Object} webpackConfig 最终生成的webpackConfig文件 可修改
 	 */
 	onBeforeBuild: (webpackConfig) => {
-	  exec('rm -rf ' + config.build.prodRoot, () => {
-	    exec('mkdir -p ' + config.build.prodRoot, () => {
+	  exec('rm -rf prod', () => {
+	    exec('mkdir prod', () => {
 	      exec('cp -R ' + 
 	        path.join(config.devpath, 'assets') + ' ' + 
-	        config.build.prodRoot + (os.platform() === 'darwin' ? '/assets/' : '/assets/')
+	        'prod' + (os.platform() === 'darwin' ? '/assets/' : '/assets/')
 	      )
 	    })
 	  })
