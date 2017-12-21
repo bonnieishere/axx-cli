@@ -5,16 +5,16 @@ let path = require('path')
 let _ = require('lodash')
 let ExtractTextPlugin = require("extract-text-webpack-plugin")
 let config = require(path.resolve(process.cwd(), 'axx-cli-config/config'))
-let baseWebpackConfig = require('./base.config')
 
-let baseWebpackConfigClone = _.cloneDeep(baseWebpackConfig)
+let baseConfig = require('./base.config')
+let baseConfigClone = _.cloneDeep(baseConfig)
 
-baseWebpackConfigClone.module.loaders[6] = ({
+baseConfigClone.module.loaders[6] = ({
   test: /\.css?$/,
-  loader: ExtractTextPlugin.extract("style-loader","css-loader")
+  loader: ExtractTextPlugin.extract("style-loader", "css-loader")
 })
 
-module.exports = merge(baseWebpackConfigClone, {
+module.exports = merge(baseConfigClone, {
   output: config.build.output,
 
   plugins: [

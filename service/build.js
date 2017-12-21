@@ -16,7 +16,6 @@ let webpack = require('webpack')
 let webpackConfig = require('./config/prod.config')
 let ProgressPlugin = require('webpack/lib/ProgressPlugin')
 let hook = require(path.resolve(process.cwd(), 'axx-cli-config/custom/hook'))
-console.log(webpackConfig.plugins)
 
 // webpack编译
 function webpackCompile() {
