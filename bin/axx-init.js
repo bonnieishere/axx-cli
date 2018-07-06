@@ -27,8 +27,8 @@ program.action(function () {
 
 program.parse(process.argv);
 
-initVue('multi', 'demo');
-return;
+// initVue('multi', 'demo');
+// return;
 // initReact('multi', 'demo');
 
 // 获取用户输入
