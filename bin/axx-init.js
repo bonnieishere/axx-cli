@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 
-const inquirer      = require('inquirer');
-const program       = require('commander');
-const { initVue }   = require('../lib/feature-vue');
-const { initReact } = require('../lib/feature-react');
+const fs       = require('fs');
+const path     = require('path');
+const inquirer = require('inquirer');
+const program  = require('commander');
+const config   = require('../lib/config');
+
+const { checkTemp, copyTemp } = require('../lib/utils');
 
 program.usage('axx init');
 
@@ -27,37 +30,31 @@ program.action(function () {
 
 program.parse(process.argv);
 
-// initVue('multi', 'demo');
-// return;
-// initReact('multi', 'demo');
-
-// 获取用户输入
-inquirer.prompt([{
-  type: 'list',
-  name: 'type',
-  message: 'select project type',
-  choices: ['vue', 'react']
-},
-{
-  type: 'list',
-  name: 'page',
-  message: 'select view type',
-  choices: ['multi', 'spa']
-}, {
-  type: 'input',
-  name: 'name',
-  message: 'input your project name',
-  default: 'demo'
-}]).then((answers) => {
-  // 判断用户输入，调用项目初始化方法
-  switch (answers.type) {
-    case 'vue':
-      initVue(answers.page, answers.name);
-      break;
-    case 'react':
-      initReact(answers.page, answers.name);
-      break;
-  }
-}).catch((error) => {
+// 检查模板，没有模板会下载，有模板检查更新。
+checkTemp().then(function() {
+  const choices = fs.readdirSync(config.temp.dir).filter(function(file) {
+    // 获取文件状态
+    const info = fs.statSync(path.join(config.temp.dir, file));
+    // 如果是文件夹返回文件名
+    return info.isDirectory()
+  });
+  // 获取用户输入
+  inquirer.prompt([{
+    type: 'list',
+    name: 'type',
+    message: 'select a template',
+    choices
+  }, {
+    type: 'input',
+    name: 'name',
+    message: 'input your project name',
+    default: 'demo'
+  }]).then((answers) => {
+    // 判断用户输入，调用项目初始化方法
+    copyTemp(path.join(config.temp.dir, answers.type), answers.name);
+  }).catch((error) => {
+    console.log(error);
+  });
+}, (error) => {
   console.log(error);
 });
