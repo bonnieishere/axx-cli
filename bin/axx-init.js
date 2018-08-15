@@ -2,6 +2,7 @@
 
 const fs       = require('fs');
 const path     = require('path');
+const Chalk    = require('chalk');
 const inquirer = require('inquirer');
 const program  = require('commander');
 const config   = require('../lib/config');
@@ -16,16 +17,6 @@ program.on('--help', () => {
   console.log('');
   console.log('    $ axx init');
   console.log('');
-});
-
-program.action(function () {
-  inquirer.prompt([{
-    type: 'checkbox',
-    name: 'type',
-    message: 'select project type'
-  }]).then((answers) => {
-    console.log(answers);
-  });
 });
 
 program.parse(process.argv);
@@ -53,8 +44,8 @@ checkTemp().then(function() {
     // 判断用户输入，调用项目初始化方法
     copyTemp(path.join(config.temp.dir, answers.type), answers.name);
   }).catch((error) => {
-    console.log(error);
+    console.log(Chalk.red(error));
   });
 }, (error) => {
-  console.log(error);
+  console.log(Chalk.red(error));
 });

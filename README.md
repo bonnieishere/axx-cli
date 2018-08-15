@@ -14,3 +14,15 @@ npm install axx-cli -g --registry=https://registry.npm.taobao.org
 ```
 axx init
 ```
+
+### run project 启动项目(***需要在项目根目录执行***)
+
+```
+axx run
+```
+
+### publish project 打包项目(***需要在项目根目录执行***)
+
+```
+axx pub
+```
